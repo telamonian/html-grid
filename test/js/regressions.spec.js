@@ -7,7 +7,7 @@
  *
  */
 
-const utils = require("@finos/perspective-test");
+const utils = require("../../testutils/src/js/index");
 const path = require("path");
 const {capture_update} = require("./utils.js");
 
