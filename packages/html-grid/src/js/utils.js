@@ -119,6 +119,15 @@ export const html = (strings, ...args) =>
         .filter(a => !!a)
         .join("");
 
+const invertPromise = () => {
+    let resolve;
+    let promise = new Promise(_resolve => {
+        resolve = _resolve;
+    });
+    promise.resolve = resolve;
+    return promise;
+};
+
 export function throttlePromise(target, property, descriptor) {
     const lock = Symbol("private lock");
     const f = descriptor.value;
@@ -229,5 +238,14 @@ export const default_types = {
             },
             null_value: -1
         }
+    }
+};
+
+export const registerPlugin = (name, plugin) => {
+    if (global.registerPlugin) {
+        global.registerPlugin(name, plugin);
+    } else {
+        global.__perspective_plugins__ = global.__perspective_plugins__ || [];
+        global.__perspective_plugins__.push([name, plugin]);
     }
 };

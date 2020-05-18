@@ -1,0 +1,53 @@
+{
+    "name": "html-grid",
+    "version": "0.4.8",
+    "description": "Grid framework built on a virtualized <table> element",
+    "main": "dist/cjs/html-grid.js",
+    "module": "dist/cjs/html-grid.js",
+    "browser": "dist/cjs/html-grid.js",
+    "unpkg": "dist/umd/html-grid.js",
+    "jsdelivr": "dist/umd/html-grid.js",
+    "files": [
+        "dist/**/*",
+        "babel.config.js"
+    ],
+    "scripts": {
+        "bench": "npm-run-all bench:build bench:run",
+        "bench:build": "echo \"No Benchmarks\"",
+        "bench:run": "echo \"No Benchmarks\"",
+        "prebuild": "mkdirp dist/esm",
+        "build:babel": "cpx \"src/**/*\" dist && babel src/js --source-maps --out-dir dist/esm",
+        "build:webpack:esm": "webpack --color --config src/config/cjs.config.js",
+        "build:webpack:umd": "webpack --color --config src/config/umd.config.js",
+        "build": "npm-run-all build:babel build:webpack:esm build:webpack:umd",
+        "test:build": "cpx \"test/html/*\" dist/umd && cpx \"test/csv/*\" dist/umd && cpx \"test/css/*\" dist/umd",
+        "test:run": "TZ=UTC jest --rootDir=. --config=../perspective-test/jest.config.js --color",
+        "test:write": "WRITE_TESTS=true npm run test:run",
+        "test:interactive": "PSP_PAUSE_ON_FAILURE=true TZ=UTC node ../../node_modules/.bin/jest --rootDir=. --config=../perspective-test/jest.config.js --color --runInBand",
+        "test": "npm-run-all test:build test:run",
+        "watch:babel": "babel src/js --source-maps --watch --out-dir dist/esm",
+        "watch:webpack": "webpack --watch --color --config src/config/umd.config.js",
+        "watch": "npm-run-all -p watch:*",
+        "clean": "rimraf dist",
+        "clean:screenshots": "rimraf \"screenshots/**/*.@(failed|diff).png\""
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/telamonian/html-grid"
+    },
+    "author": "",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "@finos/perspective-viewer": "^0.4.8",
+        "core-js": "^3.6.4",
+        "superscript-number": "^1.0.0"
+    },
+    "devDependencies": {
+        "@finos/perspective": "^0.4.8",
+        "@finos/perspective-test": "^0.4.8",
+        "@finos/perspective-webpack-plugin": "^0.4.8"
+    }
+}

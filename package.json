@@ -1,47 +1,15 @@
 {
-    "name": "html-grid",
-    "version": "0.4.8",
-    "description": "Grid framework built on a virtualized <table> element",
-    "main": "dist/cjs/html-grid.js",
-    "module": "dist/cjs/html-grid.js",
-    "browser": "dist/cjs/html-grid.js",
-    "unpkg": "dist/umd/html-grid.js",
-    "jsdelivr": "dist/umd/html-grid.js",
-    "files": [
-        "dist/**/*",
-        "babel.config.js"
-    ],
-    "scripts": {
-        "bench": "npm-run-all bench:build bench:run",
-        "bench:build": "echo \"No Benchmarks\"",
-        "bench:run": "echo \"No Benchmarks\"",
-        "prebuild": "mkdirp dist/esm",
-        "build:babel": "cpx \"src/**/*\" dist && babel src/js --source-maps --out-dir dist/esm",
-        "build:webpack:esm": "webpack --color --config src/config/cjs.config.js",
-        "build:webpack:umd": "webpack --color --config src/config/umd.config.js",
-        "build": "npm-run-all build:babel build:webpack:esm build:webpack:umd",
-        "test:build": "cpx \"test/html/*\" dist/umd",
-        "test:run": "jest --rootDir=. --config=../perspective-test/jest.config.js --color",
-        "test": "npm-run-all test:build test:run",
-        "watch:babel": "babel src/js --source-maps --watch --out-dir dist/esm",
-        "watch:webpack": "webpack --watch --color --config src/config/umd.config.js",
-        "watch": "npm-run-all -p watch:*",
-        "clean": "rimraf dist",
-        "clean:screenshots": "rimraf \"screenshots/**/*.@(failed|diff).png\""
-    },
-    "publishConfig": {
-        "access": "public"
-    },
+    "private": true,
     "repository": {
         "type": "git",
-        "url": "https://github.com/finos/perspective"
+        "url": "https://github.com/telamonian/html-grid"
     },
-    "author": "",
-    "license": "Apache-2.0",
-    "dependencies": {
-        "core-js": "^3.6.4",
-        "superscript-number": "^1.0.0"
+    "engines": {
+        "node": ">=8.12.0"
     },
+    "workspaces": [
+        "packages/*"
+    ],
     "devDependencies": {
         "@babel/cli": "^7.8.4",
         "@babel/core": "^7.8.4",
@@ -50,20 +18,31 @@
         "@babel/plugin-proposal-optional-chaining": "^7.8.3",
         "@babel/preset-env": "^7.8.4",
         "@babel/runtime": "^7.8.4",
-        "@finos/perspective": "^0.4.8",
-        "@finos/perspective-webpack-plugin": "^0.4.8",
         "babel-plugin-lodash": "^3.3.4",
         "babel-plugin-transform-custom-element-classes": "^0.1.0",
         "clean-css-cli": "4.2.1",
         "clean-css-loader": "^1.1.0",
+        "core-js": "^3.6.4",
         "cpx": "^1.5.0",
         "css-loader": "^0.28.7",
+        "html-loader-jest": "^0.2.1",
         "jest": "^25.1.0",
         "jest-junit": "^10.0.0",
         "less": "^3.9.0",
         "less-loader": "^4.1.0",
         "npm-run-all": "^4.1.3",
+        "puppeteer": "^3.0.4",
+        "term-img": "^4.1.0",
         "webpack": "^4.0.0",
         "webpack-cli": "^3.3.2"
+    },
+    "resolutions": {
+        "**/jest": "^25.1.0",
+        "**/write-file-atomic": "2.4.1",
+        "**/webpack": "^4.31.0",
+        "**/webpack-cli": "^3.3.2",
+        "**/webpack-dev-server": "3.9.0",
+        "**/react": "16.8.6",
+        "**/react-dom": "16.8.6"
     }
 }
